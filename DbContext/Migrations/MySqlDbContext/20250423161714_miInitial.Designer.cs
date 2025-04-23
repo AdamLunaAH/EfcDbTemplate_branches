@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DbContext.Migrations.SqlServerDbContext
+namespace DbContext.Migrations.MySqlDbContext
 {
-    [DbContext(typeof(MainDbContext.SqlServerDbContext))]
-    [Migration("20250423153919_miInitial")]
+    [DbContext(typeof(MainDbContext.MySqlDbContext))]
+    [Migration("20250423161714_miInitial")]
     partial class miInitial
     {
         /// <inheritdoc />
@@ -21,17 +21,17 @@ namespace DbContext.Migrations.SqlServerDbContext
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("ArtistMusicGroup", b =>
                 {
                     b.Property<Guid>("MembersArtistId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("MusicGroupsMusicGroupId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("MembersArtistId", "MusicGroupsMusicGroupId");
 
@@ -44,22 +44,22 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     b.Property<Guid>("AlbumId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("CopiesSold")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("MusicGroupsMusicGroupId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<int>("ReleaseYear")
                         .HasColumnType("int");
 
                     b.Property<bool>("Seeded")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("AlbumId");
 
@@ -72,19 +72,19 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     b.Property<Guid>("ArtistId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("BirthDay")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<bool>("Seeded")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("ArtistId");
 
@@ -95,16 +95,16 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     b.Property<Guid>("MusicGroupId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("EstablishedYear")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<bool>("Seeded")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("MusicGroupId");
 
