@@ -1,4 +1,4 @@
-# To allow Windows to execute .ps1 files, 
+# To allow Windows to execute .ps1 files,
 # In powerShell execute below once:
 # Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
@@ -42,8 +42,9 @@ dotnet ef migrations add miInitial -c $DBContext -p ../DbContext -s ../DbContext
 dotnet ef database update -c $DBContext -p ../DbContext -s ../DbContext
 
 # Check for 'seed' argument and seed the database if present
-if ($args[1] -eq "seed") {
+if ($args[0] -eq "seed") {
     # Seed the database
     Set-Location ../AppSeeder
+    # cd ../AppSeeder
     dotnet run
 }
