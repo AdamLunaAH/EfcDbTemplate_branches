@@ -7,15 +7,17 @@ using Models;
 namespace DbContext;
 
 //DbContext namespace is a fundamental EFC layer of the database context and is
-//used for all Database connection as well as for EFC CodeFirst migration and database updates 
+//used for all Database connection as well as for EFC CodeFirst migration and database updates
 
 public class MainDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     #region class - Table mapping
-    public DbSet<Friend> Friends { get; set; }
-    public DbSet<Address> Addresses { get; set; }
-    public DbSet<Pet> Pets { get; set; }
-    public DbSet<Quote> Quotes { get; set; }
+
+    // Cars Table
+    public DbSet<Car> Cars { get; set; }
+    public DbSet<Owner> Owners { get; set; }
+
+
     #endregion
 
     #region get right DBContext from DbSet configuration in Appsettings
@@ -83,7 +85,7 @@ public class MainDbContext : Microsoft.EntityFrameworkCore.DbContext
                 var connectionString = AppConfig.DbSetActive.DbConnectionString;
                 optionsBuilder.UseSqlServer(connectionString,
                     options => options.EnableRetryOnFailure());
-                    
+
             }
             base.OnConfiguring(optionsBuilder);
         }
