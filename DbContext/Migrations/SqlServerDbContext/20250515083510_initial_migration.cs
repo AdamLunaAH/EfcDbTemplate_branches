@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DbContext.Migrations.SqlServerDbContext
 {
     /// <inheritdoc />
-    public partial class miInitial : Migration
+    public partial class initial_migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,9 @@ namespace DbContext.Migrations.SqlServerDbContext
                 columns: table => new
                 {
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Age = table.Column<int>(type: "int", nullable: false),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -30,6 +32,8 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     CarId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RegNumber = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Make = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Model = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },

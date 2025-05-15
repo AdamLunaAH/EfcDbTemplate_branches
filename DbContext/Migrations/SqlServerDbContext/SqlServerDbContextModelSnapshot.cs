@@ -28,6 +28,12 @@ namespace DbContext.Migrations.SqlServerDbContext
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Make")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<Guid?>("OwnerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -50,7 +56,13 @@ namespace DbContext.Migrations.SqlServerDbContext
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("Seeded")

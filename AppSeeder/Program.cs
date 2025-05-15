@@ -43,7 +43,7 @@ namespace AppConsole
             Console.WriteLine($"\nConnecting to database...");
             Console.WriteLine($"Database type: {AppConfig.DbSetActive.DbServer}");
             Console.WriteLine($"Connection used: {AppConfig.DbSetActive.DbConnection}");
-  
+
             Console.WriteLine($"\nSeeding database...");
             try
             {
@@ -68,15 +68,14 @@ namespace AppConsole
         private static void WriteModel(List<Car> modelList)
         {
             Console.WriteLine($"NrOfCars: {modelList.Count()}");
-               
-            Console.WriteLine($"First Car: {modelList.First().RegNumber} owned by {modelList.First().Owner.Name}");
-            Console.WriteLine($"Last Car: {modelList.Last().RegNumber} owned by {modelList.First().Owner.Name}");
+            Console.WriteLine($"First Car: {modelList.First().RegNumber} owned by {modelList.First().Owner.FirstName}");
+            Console.WriteLine($"Last Car: {modelList.Last().RegNumber} owned by {modelList.First().Owner.FirstName}");
         }
 
         private static List<Car> SeedModel(int nrItems)
         {
             var seeder = new SeedGenerator();
-            
+
             //Seed Cars
             var cars = seeder.ItemsToList<Car>(nrItems);
             foreach (var item in cars)
@@ -109,7 +108,7 @@ namespace AppConsole
                 #region Reading the database using EFC
                 var _modelList = await db.Cars
                     .Include(x => x.Owner)
-                    .ToListAsync();                
+                    .ToListAsync();
                 #endregion
 
                 WriteModel(_modelList);

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbContext.Migrations.SqlServerDbContext
 {
     [DbContext(typeof(MainDbContext.SqlServerDbContext))]
-    [Migration("20250514153149_miInitial")]
-    partial class miInitial
+    [Migration("20250515083510_initial_migration")]
+    partial class initial_migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,12 @@ namespace DbContext.Migrations.SqlServerDbContext
                     b.Property<Guid>("CarId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Make")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<Guid?>("OwnerId")
                         .HasColumnType("uniqueidentifier");
@@ -53,7 +59,13 @@ namespace DbContext.Migrations.SqlServerDbContext
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("Seeded")
