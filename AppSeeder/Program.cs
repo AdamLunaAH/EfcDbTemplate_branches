@@ -27,15 +27,20 @@ namespace AppConsole
     class Program
     {
         const int nrItemsSeed = 1000;
+
+        const int nrGarage = 10;
+
         static void Main(string[] args)
         {
             #region run below to test the model only
 
             Console.WriteLine($"\nSeeding the Model...");
             var modelList = SeedModel(nrItemsSeed);
+            // var modelList2 = SeedModel(nrGarage);
 
             Console.WriteLine($"\nTesting Model...");
             WriteModel(modelList);
+            // WriteModel(modelList2);
             #endregion
 
 
@@ -72,6 +77,11 @@ namespace AppConsole
             Console.WriteLine($"Last Car: {modelList.Last().RegNumber} owned by {modelList.First().Owner.FirstName}");
         }
 
+        // private static void WriteModel2(List<Car> modelList2)
+        // {
+        //     Console.WriteLine($" : { modelList2.Count()}");
+        // }
+
         private static List<Car> SeedModel(int nrItems)
         {
             var seeder = new SeedGenerator();
@@ -81,10 +91,34 @@ namespace AppConsole
             foreach (var item in cars)
             {
                 item.Owner = new Owner().Seed(seeder);
+                // item.Garage = new Garage().Seed(seeder);
+
+
+                var _garages = new List<Garage>();
+                for (int c = 0; c < seeder.Next(1, 5); c++)
+                {
+                    _garages.Add(new Garage.Seed(seeder));
+                }
+
+
+
+
             }
+
+            // var garages = seeder.ItemsToList<Garage>(10);
+            // foreach (var items in garages)
+            // {
+
+            // }
 
             return cars;
         }
+
+        // private static List<Garage> SeedModel(int nrItems)
+        // {
+
+        // }
+
         private static async Task SeedDataBase(List<Car> _modelList)
         {
             using (var db = MainDbContext.DbContext())

@@ -19,6 +19,8 @@ namespace Models
         //Nav props
         public Owner Owner { get; set; } = null;
 
+        public Garage Garage { get; set; } = null;
+
 
         public bool Seeded { get; set; } = false;
 

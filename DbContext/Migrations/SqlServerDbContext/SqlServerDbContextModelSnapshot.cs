@@ -28,6 +28,9 @@ namespace DbContext.Migrations.SqlServerDbContext
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("GarageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Make")
                         .HasColumnType("nvarchar(200)");
 
@@ -45,9 +48,28 @@ namespace DbContext.Migrations.SqlServerDbContext
 
                     b.HasKey("CarId");
 
+                    b.HasIndex("GarageId");
+
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("Models.Garage", b =>
+                {
+                    b.Property<Guid>("GarageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("Seeded")
+                        .HasColumnType("bit");
+
+                    b.HasKey("GarageId");
+
+                    b.ToTable("Garage");
                 });
 
             modelBuilder.Entity("Models.Owner", b =>
@@ -75,11 +97,22 @@ namespace DbContext.Migrations.SqlServerDbContext
 
             modelBuilder.Entity("Models.Car", b =>
                 {
+                    b.HasOne("Models.Garage", "Garage")
+                        .WithMany("Cars")
+                        .HasForeignKey("GarageId");
+
                     b.HasOne("Models.Owner", "Owner")
                         .WithMany("Cars")
                         .HasForeignKey("OwnerId");
 
+                    b.Navigation("Garage");
+
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("Models.Garage", b =>
+                {
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("Models.Owner", b =>

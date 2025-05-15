@@ -12,6 +12,8 @@ namespace Models
 
         public string Name {get; set;}
 
+        public List<Car> Cars { get; set; } = null;
+
         // public string Make { get; set; }
 
         // public string Model { get; set; }
