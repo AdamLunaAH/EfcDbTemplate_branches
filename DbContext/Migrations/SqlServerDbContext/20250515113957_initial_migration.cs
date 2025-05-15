@@ -12,16 +12,16 @@ namespace DbContext.Migrations.SqlServerDbContext
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Garage",
+                name: "Garages",
                 columns: table => new
                 {
                     GarageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    GarageName = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Garage", x => x.GarageId);
+                    table.PrimaryKey("PK_Garages", x => x.GarageId);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,9 +55,9 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     table.PrimaryKey("PK_Cars", x => x.CarId);
                     table.ForeignKey(
-                        name: "FK_Cars_Garage_GarageId",
+                        name: "FK_Cars_Garages_GarageId",
                         column: x => x.GarageId,
-                        principalTable: "Garage",
+                        principalTable: "Garages",
                         principalColumn: "GarageId");
                     table.ForeignKey(
                         name: "FK_Cars_Owners_OwnerId",
@@ -84,7 +84,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                 name: "Cars");
 
             migrationBuilder.DropTable(
-                name: "Garage");
+                name: "Garages");
 
             migrationBuilder.DropTable(
                 name: "Owners");

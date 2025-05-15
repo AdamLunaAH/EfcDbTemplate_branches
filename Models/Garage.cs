@@ -10,9 +10,13 @@ namespace Models
         [Key]
         public Guid GarageId {get; set;}
 
-        public string Name {get; set;}
+        public string GarageName {get; set;}
 
-        public List<Car> Cars { get; set; } = null;
+        // public int GarageNr { get; set; }
+
+// nav prop
+        public List<Car> Cars { get; set; }
+
 
         // public string Make { get; set; }
 
@@ -31,7 +35,7 @@ namespace Models
             // string carmake = seeder.FromString("BMW, Fiat, VOLVO, VW, Ford");
             // string carmodel = seeder.FromString("Polo, 500, V70, M3, Fiesta");
 
-
+            string garagename = $"{seeder.FirstName}'s Garage";
 
 
             return new Garage
@@ -40,7 +44,11 @@ namespace Models
                 // RegNumber = $"{regchar} {regnr}",
                 // Make = $"{carmake}",
                 // Model = $"{carmodel}",
-                Name = $"{seeder.FirstName}'s Garage",
+                // Name = $"{seeder.FirstName}'s Garage",
+                GarageName = garagename,
+                // Name = "garage",
+
+                // GarageNr = seeder.Next(100, 999),
                 Seeded = true
             };
         }

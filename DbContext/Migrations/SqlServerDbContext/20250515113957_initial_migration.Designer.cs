@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbContext.Migrations.SqlServerDbContext
 {
     [DbContext(typeof(MainDbContext.SqlServerDbContext))]
-    [Migration("20250515092202_initial_migration")]
+    [Migration("20250515113957_initial_migration")]
     partial class initial_migration
     {
         /// <inheritdoc />
@@ -64,7 +64,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("GarageName")
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("Seeded")
@@ -72,7 +72,7 @@ namespace DbContext.Migrations.SqlServerDbContext
 
                     b.HasKey("GarageId");
 
-                    b.ToTable("Garage");
+                    b.ToTable("Garages");
                 });
 
             modelBuilder.Entity("Models.Owner", b =>

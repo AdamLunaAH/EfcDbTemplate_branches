@@ -12,6 +12,7 @@ using Seido.Utilities.SeedGenerator;
 using Configuration;
 using Models;
 using DbContext;
+using System.Xml.Schema;
 
 namespace AppConsole
 {
@@ -28,7 +29,7 @@ namespace AppConsole
     {
         const int nrItemsSeed = 1000;
 
-        const int nrGarage = 10;
+        // const int nrGarage = 10;
 
         static void Main(string[] args)
         {
@@ -87,31 +88,105 @@ namespace AppConsole
             var seeder = new SeedGenerator();
 
             //Seed Cars
+            var garages = seeder.ItemsToList<Garage>(10);
             var cars = seeder.ItemsToList<Car>(nrItems);
+
+            // var maxgarages = 0;
+
+
+
             foreach (var item in cars)
             {
                 item.Owner = new Owner().Seed(seeder);
-                // item.Garage = new Garage().Seed(seeder);
+
+                // item.Garage = seeder.Bool ? seeder.FromList<Garage>(garages) : null;
 
 
-                var _garages = new List<Garage>();
-                for (int c = 0; c < seeder.Next(1, 5); c++)
-                {
-                    _garages.Add(new Garage.Seed(seeder));
-                }
+                // if (maxgarages < 10)
+                // {
+                //     var _garages = new List<Garage>();
+                //     for (int c = 0; c < seeder.Next(1, 5); c++)
+                //     // {
+                //     //     _garages.Add(Garage.Seed(seeder));
+                //     // }
+                //     {
+                //         var garage = new Garage().Seed(seeder);
+                //         // garage.Seed(seeder);
+                //         _garages.Add(garage);
 
+                //     }
 
+                //     item.Garage = _garages.Count > 0 ? _garages : null;
+
+                //     maxgarages++;
+
+                // }
 
 
             }
 
-            // var garages = seeder.ItemsToList<Garage>(10);
-            // foreach (var items in garages)
-            // {
 
-            // }
+            foreach (var item in garages)
+            {
+                item.Cars = seeder.UniqueIndexPickedFromList(seeder.Next(1, 4), cars);
+                foreach (var car in item.Cars)
+                {
+                    car.Garage = item;
+                }
+            }
 
-            return cars;
+
+            // for (int i = 0; i < nrItems; i++)
+                // {
+                //     cars[i].Owner = new Owner().Seed(seeder);
+
+                //     if (maxgarages < 10)
+                //     {
+                //         var _garages = new List<Garage>();
+                //         for (int c = 0; c < seeder.Next(1, 5); c++)
+                //         // {
+                //         //     _garages.Add(Garage.Seed(seeder));
+                //         // }
+                //         {
+                //             var garage = new Garage().Seed(seeder);
+                //             // garage.Seed(seeder);
+                //             _garages.Add(garage);
+
+                //         }
+
+                //         cars[i].Garage = _garages.Count > 0 ? _garages : null;
+
+                //         maxgarages++;
+
+                //     }
+
+
+
+                // }
+                // foreach (var item in cars)
+                //     {
+                //         item.Owner = new Owner().Seed(seeder);
+                //         // item.Garage = new Garage().Seed(seeder);
+
+
+                //         var _garages = new List<Garage>();
+                //         for (int c = 0; c < seeder.Next(1, 5); c++)
+                //         {
+                //             _garages.Add(new Garage.Seed(seeder));
+                //         }
+
+
+
+
+                //     }
+
+                // var garages = seeder.ItemsToList<Garage>(10);
+                // foreach (var items in garages)
+                // {
+
+                // }
+
+                return cars;
         }
 
         // private static List<Garage> SeedModel(int nrItems)
@@ -142,6 +217,7 @@ namespace AppConsole
                 #region Reading the database using EFC
                 var _modelList = await db.Cars
                     .Include(x => x.Owner)
+                    // .Include(x => x.Garage)
                     .ToListAsync();
                 #endregion
 
