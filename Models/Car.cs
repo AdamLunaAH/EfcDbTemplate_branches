@@ -5,12 +5,12 @@ using Seido.Utilities.SeedGenerator;
 
 namespace Models
 {
-	public class Car  : ISeed<Car>
-	{
+    public class Car : ISeed<Car>
+    {
         [Key]
-        public Guid CarId {get; set;}
+        public Guid CarId { get; set; }
 
-        public string RegNumber {get; set;}
+        public string RegNumber { get; set; }
 
         public string Make { get; set; }
 
@@ -26,17 +26,24 @@ namespace Models
 
         public Car Seed(SeedGenerator seeder)
         {
-            string regchar = seeder.FromString("ABC, EFT, HJY, HGT, GTR");
-            int regnr = seeder.Next(111,999);
-            string carmake = seeder.FromString("BMW, Fiat, VOLVO, VW, Ford");
-            string carmodel = seeder.FromString("Polo, 500, V70, M3, Fiesta");
+
+            char rc1 = (char)seeder.Next('A', 'Z');
+            char rc2 = (char)seeder.Next('A', 'Z');
+            char rc3 = (char)seeder.Next('A', 'Z');
+
+
+            // string regchar = seeder.FromString("ABC, EFT, HJY, HGT, GTR");
+            int regnr = seeder.Next(111, 999);
+            string carmake = seeder.FromString("BMW, Fiat, VOLVO, VW, Ford, Cizeta-Moroder");
+            string carmodel = seeder.FromString("Polo, 500, V70, M3, Fiesta, V16T");
 
 
 
             return new Car
             {
                 CarId = Guid.NewGuid(),
-                RegNumber = $"{regchar} {regnr}",
+                // RegNumber = $"{regchar} {regnr}",
+                RegNumber = $"{rc1}{rc2}{rc3} {regnr}",
                 Make = $"{carmake}",
                 Model = $"{carmodel}",
                 Seeded = true

@@ -35,7 +35,8 @@ namespace Models
             // string carmake = seeder.FromString("BMW, Fiat, VOLVO, VW, Ford");
             // string carmodel = seeder.FromString("Polo, 500, V70, M3, Fiesta");
 
-            string garagename = $"{seeder.FirstName}'s Garage";
+            char c1 = (char)seeder.Next('A', 'Z');
+            string garagename = $"{c1}. {seeder.FirstName}'s Garage";
 
 
             return new Garage
